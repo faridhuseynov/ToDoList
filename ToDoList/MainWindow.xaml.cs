@@ -23,6 +23,7 @@ namespace ToDoList
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
         }
     }
 }

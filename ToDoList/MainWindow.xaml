@@ -5,8 +5,65 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoList"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Name="Main">
+    <!--<Window.Resources>
+        <DataTemplate x:Key="ToDoItem">
+                <UniformGrid Rows="1" Columns="2">
+                    <Label Content="{Binding Name}"></Label>
+                    <Label HorizontalAlignment="Right" Content="{Binding IsDone}"></Label>
+                </UniformGrid>
+            </DataTemplate>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListBox ItemsSource="{Binding Items}" 
+                 FontSize="30" 
+                 ItemTemplate="{StaticResource ToDoItem}"
+                 HorizontalContentAlignment="Stretch"
+                 SelectedItem="{Binding SelectedTask}">
+        </ListBox>
+        <DockPanel Grid.Row="1">
+            <Button FontSize="30" Command="{Binding DoneCommand}" DockPanel.Dock="Right">✔</Button>
+            <Button FontSize="30" Command="{Binding AddTaskCommand}" DockPanel.Dock="Right">➕</Button>
+            <TextBox Text="{Binding TaskName, UpdateSourceTrigger=PropertyChanged}" FontSize="30" DockPanel.Dock="Left"></TextBox>
+        </DockPanel>
+    </Grid>-->
+
+    <Window.Resources>
+        <DataTemplate x:Key="ToDoItem">
+            <DockPanel>
+                <Button FontSize="30" 
+                        Command="{Binding DataContext.DoneCommand, ElementName=Main}" 
+                        CommandParameter="{Binding}"
+                        DockPanel.Dock="Right">
+                    ✔
+                </Button>
+                <UniformGrid Rows="1" Columns="2">
+                    <Label Content="{Binding Name}"></Label>
+                    <Label HorizontalAlignment="Right" Content="{Binding IsDone}"></Label>
+                </UniformGrid>
+            </DockPanel>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListBox ItemsSource="{Binding Items}" 
+                 FontSize="30" 
+                 ItemTemplate="{StaticResource ToDoItem}"
+                 HorizontalContentAlignment="Stretch"
+                 SelectedItem="{Binding SelectedTask}">
+        </ListBox>
+        <DockPanel Grid.Row="1">
+            <Button FontSize="30" Command="{Binding AddTaskCommand}" DockPanel.Dock="Right">➕</Button>
+            <Button FontSize="30" Command="{Binding RemoveCommand}" DockPanel.Dock="Left">❌</Button>
+            
+            <TextBox Text="{Binding TaskName, UpdateSourceTrigger=PropertyChanged}" FontSize="30" DockPanel.Dock="Left"></TextBox>
+        </DockPanel>
     </Grid>
 </Window>
